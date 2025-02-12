@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Test Sayfası</h1>
+    <button id="testApiButton">API'yi Test Et</button>
+
+    <script>
+        // "API'yi Test Et" butonuna tıklandığında bu fonksiyon çalışacak
+        document.getElementById("testApiButton").addEventListener("click", function() {
+            fetch("http://127.0.0.1:8000/api/urun-kodlari", {
+                method: "GET",
+                headers: {
+                    "token": "5ac96f1dxxxxxxxxxxxx",  // Burada doğru token'ı ekle
+                    "Accept": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Başarılı yanıt geldiğinde veriyi konsola yazdır
+                console.log(data);
+                alert(JSON.stringify(data, null, 2)); // JSON yanıtını alert içinde göster
+            })
+            .catch(error => {
+                // Hata oluşursa, hatayı konsola yazdır
+                console.error("Hata:", error);
+            });
+        });
+    </script>
+</body>
+</html>
